@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIN & MAX LEADERBOARD</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .main{
+        width: 500px;
+        margin: auto;
+        margin-top: 60px;
+    }
+    .main-mini1{
+        height: 70px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .min,.max{
+        height: 100%;
+        width: 120px;
+    }
+    #max1,#min1{
+        border: 1px solid;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    #max1{
+        background-color: green;
+    }
+    #min1{
+        background-color: red;
+    }
+    .main2{
+        margin: auto;
+        margin-top: 10px;
+        width: 250px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .s{
+        text-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    #display{
+        border: 2px solid;
+        width: 170px;
+        height: 50px;
+        margin: auto;
+        margin-top: 10px;
+        background-color: gray;
+        
+    }
+    #display>h1{
+        /* border: 1px dashed; */
+        height: 100%;
+        width: 100%;
+        font-size: 40px;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #keyboard{
+        /* border: 1px solid; */
+        width: 250px;
+        margin: auto;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
+    }
+    #keyboard>div{
+        border: 2px solid;
+        height: 70px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #m{
+        grid-column-start: 2;
+        grid-column-end: 3 ;
+    }
+    #keyboard>div>button{
+        height: 100%;
+        width: 100%;
+        font-size: 25px;
+        font-weight: bolder;
+        border-style: none;   
+    }
+    #ye{
+        background-color: #FF6600;
+    }
+    #dg{
+        background-color: #668100;
+    }
+    #nevi{
+        background-color: #810065;
+    }
+    #ent{
+        border: 2px solid;
+        width: 250px;
+        height: 50px;
+        margin: auto;
+        margin-top: 20px;
+    }
+    #en{
+        height: 100%;
+        width: 100%;
+        border-style: none;
+        background-color: black;
+        font-size: 35px;
+        font-weight: bold;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="main-mini1">
+            <div class="min"><p id="min1">43</p></div>
+            <div class="max"><p id="max1">2019</p></div>
+        </div>
+        <div class="main2">
+            <p>MIN</p>
+            <p>MAX</p>
+        </div>
+        <p class="s">SCORE</p>
+        <div id="display">
+            <h1>#</h1>
+        </div>
+        <div id="keyboard">
+            <div><button id="dg">1</button></div>
+            <div><button id="ye">2</button></div>
+            <div><button id="dg">3</button></div>
+            <div><button id="ye">4</button></div>
+            <div><button id="ye">5</button></div>
+            <div><button id="ye">6</button></div>
+            <div><button id="dg">7</button></div>
+            <div><button id="ye">8</button></div>
+            <div><button id="dg">9</button></div>
+            <div id="m"><button id="nevi">0</button></div>
+        </div>
+        <div id="ent"><button id="en">ENTER</button></div>
+    </div>
+</body>
+</html>
+<script>
+    let mani=document.querySelector("#min1")
+    let maxi=document.querySelector("#max1")
+    let display=document.querySelector("#display>h1")
+    let key=document.querySelectorAll("#keyboard>div>button")
+    let enter=document.querySelector("#ent>#en")
+    let flag=true;
+    let show=""
+
+    for (let i=0;i<key.length;i++){
+        key[i].addEventListener('click',function()
+        {
+            if(flag==true){
+                show+=key[i].innerText
+                display.innerText=show
+                
+            }
+            
+        })
+    }
+    enter.addEventListener('click',function()
+    {   if(show){
+        if(show<Number(mani.innerText)){
+            mani.innerText=show
+            let flag=true
+            show=""
+    }
+        }
+        if(show>Number(maxi.innerText)){
+            maxi.innerText=show
+            let flag=true
+            show=""
+        }
+    })
+
+</script>
