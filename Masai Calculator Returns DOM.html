@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .main{
+        height: 450px;
+        width: 100%;
+        /* border: 1px solid; */
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main2{
+        height: 350px;
+        width: 290px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(5,1fr);
+        gap: 5px;
+    }
+    .main2>div{
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+    }
+    #blank1{
+        grid-column-start: 1;
+        grid-column-end: 5;
+        border-radius: 10px;
+        
+    }
+    #blank{
+        height: 100%;
+        width: 100%;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        font-weight: bolder;
+        border-style: none;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    button{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border-style: none;
+        font-size: 30px;
+        font-weight: bolder;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        background-color: #ffffff;
+    }
+    button:hover{
+        transition: all 1s;
+    }
+    .opp{
+        background-color: black;
+        color: #ffffff;
+    }
+    .opp:hover{
+        background-color:darkolivegreen;
+    }
+    #clear{
+        background-color: red;
+        color: #ffffff;
+    }
+    #clear:hover{
+        background-color: cornflowerblue;
+        color: black;
+    }
+    .cont:hover{
+        background-color: cornflowerblue;
+    }
+    #equal:hover{
+        background-color: cornflowerblue;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="main2">
+            <div id="blank1"><h1 id="blank"></h1></div>
+            <div><button class="cont">1</button></div>
+            <div><button class="cont">2</button></div>
+            <div><button class="cont">3</button></div>
+            <div><button class="opp">+</button></div>
+            <div><button class="cont">4</button></div>
+            <div><button class="cont">5</button></div>
+            <div><button class="cont">6</button></div>
+            <div><button class="opp">-</button></div>
+            <div><button class="cont">7</button></div>
+            <div><button class="cont">8</button></div>
+            <div><button class="cont">9</button></div>
+            <div><button class="opp">x</button></div>
+            <div><button id="clear">C</button></div>
+            <div><button class="cont">0</button></div>
+            <div><button id="equal">=</button></div>
+            <div><button class="opp">/</button></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let keypad=document.getElementsByClassName("cont")
+    let operator=document.getElementsByClassName("opp")
+    let display=document.getElementById("blank")
+    let equalTo=document.getElementById("equal")
+    let clearAll=document.getElementById("clear")
+
+    let firstNumber=""
+    let isFirstNumber=true;
+    let secondNumber=""
+    let result=""
+    // console.log(isFirstNumber)
+
+    for(let i=0;i<keypad.length;i++){
+        keypad[i].addEventListener('click',function()
+        {
+            if(isFirstNumber==true){
+                firstNumber+=keypad[i].innerText
+                display.innerText=firstNumber
+            }else{
+                secondNumber+=keypad[i].innerText
+                display.innerText=secondNumber
+            }
+        })
+    }
+
+    // operator catch section
+    
+    for (let i=0;i<operator.length;i++){
+        operator[i].addEventListener('click',function()
+        {
+           isFirstNumber=false;
+           
+           result=operator[i].innerText
+           display.innerText= operator[i].innerText
+        //    display.innerText=eval(result)
+         
+        })
+    }
+    function calculate(firstNumber,secondNumber,result)
+    {   
+        switch(result)
+        {
+            case"+" :
+            return Number(firstNumber) + Number(secondNumber)
+            case"-" :
+            return Number(firstNumber) - Number(secondNumber)
+            case"x" :
+            return Number(firstNumber) * Number(secondNumber)
+            case"/" :
+            return Number(firstNumber) / Number(secondNumber)
+        }
+    }
+    
+    equalTo.addEventListener('click',function()
+    {
+        display.innerText=calculate(firstNumber,secondNumber,result)
+    })
+
+    clearAll.addEventListener('click',function()
+    {
+        isFirstNumber = true;
+        result = "";
+        display.innerText = "";
+        firstNumber = "";
+        secondNumber = "";
+    })
+</script>
